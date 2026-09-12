@@ -1,4 +1,10 @@
 ---
 const links = [['Diensten', '#diensten'], ['Projecten', '#projecten'], ['Over ons', '#over-ons'], ['Werkwijze', '#werkwijze']];
 ---
-<header class="site-header"><div class="container nav-wrap"><a href="/" class="brand" aria-label="G.M.G. Construct GCV — startpagina"><img src="/logo2.jpg" alt="G.M.G. Construct GCV" width="184" height="124" /></a><nav aria-label="Hoofdnavigatie">{links.map(([label, href]) => <a href={href}>{label}</a>)}</nav><a class="button button-dark nav-cta" href="#contact">Vraag een gesprek aan <span aria-hidden="true">↗</span></a></div></header>
+<header class="site-header">
+    <div class="container nav-wrap"><a href="/" class="brand" aria-label="G.M.G. Construct GCV — startpagina"><img
+            src="/logo2.jpg" alt="G.M.G. Construct GCV" width="184" height="124"/></a>
+        <nav aria-label="Hoofdnavigatie">{links.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
+        <a class="button button-dark nav-cta" href="#contact">Vraag een gesprek aan <span
+                aria-hidden="true">↗</span></a></div>
+</header>
