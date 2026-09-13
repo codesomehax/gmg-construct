@@ -8,7 +8,7 @@ const projects = (await getProjects()).filter((project) => project.featured).sli
 <BaseLayout title="G.M.G. Construct GCV | Bouwen met zorg"
             description="G.M.G. Construct is uw betrokken partner voor verbouwingen, renovaties en degelijk maatwerk in de regio Antwerpen.">
     <Header/>
-    <main id="inhoud">
+    <main id="content">
         <section class="hero">
             <div class="hero-grid"></div>
             <div class="container hero-content"><p class="eyebrow light"><span></span>G.M.G. CONSTRUCT GCV</p>
@@ -16,13 +16,13 @@ const projects = (await getProjects()).filter((project) => project.featured).sli
                 <p class="hero-copy">Voor verbouwingen en renovaties waar helder overleg, vakkennis en een verzorgde
                     afwerking centraal staan.</p>
                 <div class="hero-actions"><a href="#contact" class="button button-yellow">Bespreek uw plannen <span
-                        aria-hidden="true">↗</span></a><a href="#projecten" class="text-link light">Bekijk realisaties
+                        aria-hidden="true">↗</span></a><a href="#projects" class="text-link light">Bekijk realisaties
                     <span aria-hidden="true">↓</span></a></div>
             </div>
             <div class="hero-mark" aria-hidden="true"><span>G</span><span>M</span><span>G</span></div>
             <p class="hero-caption">Klein genoeg voor persoonlijk contact.<br/>Ervaren genoeg voor een doordachte
                 uitvoering.</p></section>
-        <section id="diensten" class="section services container">
+        <section id="services" class="section services container">
             <SectionHeading eyebrow="Wat we doen" title="Van eerste idee tot een stevig eindresultaat."
                             intro="We denken mee over de juiste aanpak en houden de lijnen kort tijdens de uitvoering."/>
             <div class="service-list">
@@ -40,7 +40,7 @@ const projects = (await getProjects()).filter((project) => project.featured).sli
                             href="#contact">Ontdek meer <b>↗</b></a></article>
             </div>
         </section>
-        <section id="projecten" class="section projects">
+        <section id="projects" class="section projects">
             <div class="container">
                 <div class="projects-top">
                     <SectionHeading eyebrow="Recente realisaties" title="Werk waar we graag achter staan."
@@ -55,7 +55,7 @@ const projects = (await getProjects()).filter((project) => project.featured).sli
                 </a>)}</div>
             </div>
         </section>
-        <section id="over-ons" class="section about">
+        <section id="about" class="section about">
             <div class="container about-grid">
                 <div class="about-art">
                     <div class="line-art" aria-hidden="true"></div>
@@ -67,7 +67,7 @@ const projects = (await getProjects()).filter((project) => project.featured).sli
                 </div>
             </div>
         </section>
-        <section id="werkwijze" class="section process">
+        <section id="process" class="section process">
             <div class="container">
                 <SectionHeading eyebrow="Onze werkwijze" title="Duidelijkheid, van bij de start."/>
                 <ol>
@@ -92,10 +92,10 @@ const projects = (await getProjects()).filter((project) => project.featured).sli
                     <h2>Een goed project<br/>begint met een<br/><em>goed gesprek.</em></h2>
                     <p>Vertel ons kort wat u voor ogen hebt. We nemen zo snel mogelijk persoonlijk contact met u op.</p>
                 </div>
-                <form><label for="naam">Naam</label><input id="naam" name="naam" autocomplete="name" required/><label
+                <form><label for="name">Naam</label><input id="name" name="name" autocomplete="name" required/><label
                         for="email">E-mailadres</label><input id="email" name="email" type="email" autocomplete="email"
-                                                              required/><label for="bericht">Waarmee kunnen we
-                    helpen?</label><textarea id="bericht" name="bericht" rows="4" required></textarea>
+                                                              required/><label for="message">Waarmee kunnen we
+                    helpen?</label><textarea id="message" name="message" rows="4" required></textarea>
                     <button class="button button-yellow" type="submit">Verstuur uw vraag <span
                             aria-hidden="true">↗</span></button>
                     <p class="form-note">Dit formulier is een ontwerpvoorbeeld. Koppel het aan uw e-maildienst of
