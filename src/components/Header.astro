@@ -1,15 +1,23 @@
 ---
-const links = [
-    ['Diensten', '#services'],
-    ['Projecten', '#projects'],
-    ['Over ons', '#about'],
-    ['Werkwijze', '#process'],
-];
+import type {Locale} from '../i18n/translations';
+import {getTranslation, localePaths} from '../i18n/translations';
+
+interface Props {
+    locale: Locale;
+    alternateUrl: string;
+}
+const {locale, alternateUrl} = Astro.props;
+const copy = getTranslation(locale);
+const homeUrl = localePaths[locale] || '/';
+const links = [[copy.navigation.services, '#services'], [copy.navigation.projects, '#projects'], [copy.navigation.about, '#about'], [copy.navigation.process, '#process']];
 ---
 <header class="site-header">
-    <div class="container nav-wrap"><a href="/" class="brand" aria-label="G.M.G. Construct GCV — startpagina"><img
-            src="/logo2.jpg" alt="G.M.G. Construct GCV" width="184" height="124"/></a>
-        <nav aria-label="Hoofdnavigatie">{links.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
-        <a class="button button-dark nav-cta" href="#contact">Vraag een gesprek aan <span
+    <div class="container nav-wrap"><a href={homeUrl} class="brand" aria-label={`${copy.companyName} — home`}><img
+            src="/logo2.jpg" alt={copy.companyName} width="184" height="124"/></a>
+        <nav aria-label={copy.navigation.contact}>{links.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
+        <div class="nav-actions"><a class="language-switch" href={alternateUrl}
+                                    lang={locale === 'nl-BE' ? 'en-BE' : 'nl-BE'}>{copy.switchToLanguage}</a><a
+                class="button button-dark nav-cta" href="#contact">{copy.navigation.contactCta} <span
                 aria-hidden="true">↗</span></a></div>
+    </div>
 </header>

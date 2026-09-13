@@ -3,11 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro'; import Header
     from '../../components/Header.astro'; import Footer from '../../components/Footer.astro'; import {
     getProjects
 } from '../../lib/contentful';
-const projects = await getProjects();
+const projects = await getProjects('nl-BE');
 ---
 <BaseLayout title="Realisaties | G.M.G. Construct GCV"
-            description="Bekijk een selectie van renovatie- en verbouwingsprojecten van G.M.G. Construct.">
-    <Header/>
+            description="Bekijk een selectie van renovatie- en verbouwingsprojecten van G.M.G. Construct."
+            locale="nl-BE" alternateUrl="/en/projects/">
+    <Header locale="nl-BE" alternateUrl="/en/projects/"/>
     <main id="content">
         <section class="listing-hero">
             <div class="container"><p class="eyebrow"><span></span>Realisaties</p>
@@ -27,5 +28,5 @@ const projects = await getProjects();
             </div>
         </section>
     </main>
-    <Footer/>
+    <Footer locale="nl-BE"/>
 </BaseLayout>

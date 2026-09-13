@@ -1,13 +1,24 @@
+---
+import type {Locale} from '../i18n/translations';
+import {getTranslation} from '../i18n/translations';
+interface Props {
+    locale: Locale;
+}
+const {locale} = Astro.props;
+const copy = getTranslation(locale);
+const projectsUrl = locale === 'nl-BE' ? '/projecten/' : '/en/projects/';
+---
 <footer class="footer">
     <div class="container footer-grid">
-        <div><img src="/logo2.jpg" alt="G.M.G. Construct GCV" width="154" height="104"/>
-            <p>Een kleine ploeg met een grote zorg voor degelijk werk.</p></div>
-        <div><h2>In één oogopslag</h2><a href="#services">Diensten</a><a href="#projects">Realisaties</a><a
-                href="#about">Over G.M.G.</a><a href="#contact">Contact</a></div>
-        <div><h2>Contact</h2>
-            <p class="muted">Contactgegevens worden binnenkort toegevoegd.</p><a href="#contact">Neem contact op <span
+        <div><img src="/logo2.jpg" alt={copy.companyName} width="154" height="104"/>
+            <p>{copy.footer.message}</p></div>
+        <div><h2>{copy.footer.summary}</h2><a href="#services">{copy.navigation.services}</a><a
+                href={projectsUrl}>{copy.navigation.projects}</a><a href="#about">{copy.navigation.about}</a><a
+                href="#contact">{copy.navigation.contact}</a></div>
+        <div><h2>{copy.navigation.contact}</h2>
+            <p class="muted">{copy.footer.contactPlaceholder}</p><a href="#contact">{copy.footer.contactLink} <span
                     aria-hidden="true">↗</span></a></div>
     </div>
-    <div class="container footer-bottom"><span>© {new Date().getFullYear()} G.M.G. Construct GCV</span><span>Alle rechten voorbehouden</span>
-    </div>
+    <div class="container footer-bottom">
+        <span>© {new Date().getFullYear()} {copy.companyName}</span><span>{copy.footer.rights}</span></div>
 </footer>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'; import Header
+    from '../../../components/Header.astro'; import Footer from '../../../components/Footer.astro'; import {
+    getProject,
+    getProjects
+} from '../../../lib/contentful';
+export async function getStaticPaths() {
+    return (await getProjects('en-BE')).map((project) => ({params: {slug: project.slug}}));
+}
+const project = await getProject(Astro.params.slug!, 'en-BE'); if (!project) return Astro.redirect('/en/projects/');
+---
+<BaseLayout title={`${project.title} | G.M.G. Construct`} description={project.description} locale="en-BE"
+            alternateUrl="/projecten/">
+    <Header locale="en-BE" alternateUrl="/projecten/"/>
+    <main id="content">
+        <section class="project-detail-hero">
+            <div class="container"><a class="back-link" href="/en/projects/">← All projects</a>
+                <p class="eyebrow"><span></span>{project.type}</p>
+                <h1>{project.title}</h1>
+                <p>{project.description}</p></div>
+        </section>
+        <section class="container detail-visual">
+            <div><span>Project photos<br/>to be added in Contentful</span></div>
+        </section>
+        <section class="section container details">
+            <div><p class="eyebrow"><span></span>Project details</p>
+                <h2>Carefully delivered,<br/>from start to finish.</h2></div>
+            <dl>
+                <div>
+                    <dt>Type</dt>
+                    <dd>{project.type}</dd>
+                </div>
+                <div>
+                    <dt>Location</dt>
+                    <dd>{project.location}</dd>
+                </div>
+                <div>
+                    <dt>Year</dt>
+                    <dd>{project.year}</dd>
+                </div>
+                <div>
+                    <dt>Services</dt>
+                    <dd>{project.services.join(', ')}</dd>
+                </div>
+            </dl>
+        </section>
+        <section class="contact-section small-cta">
+            <div class="container"><p class="eyebrow light"><span></span>Have plans of your own?</p>
+                <h2>Tell us where you<br/><em>want to go.</em></h2><a href="/en/#contact" class="button button-yellow">Get
+                    in touch <span>↗</span></a></div>
+        </section>
+    </main>
+    <Footer locale="en-BE"/>
+</BaseLayout>

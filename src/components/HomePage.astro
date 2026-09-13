@@ -1,0 +1,97 @@
+---
+import type {Locale} from '../i18n/translations';
+import {getTranslation} from '../i18n/translations';
+import {getProjects} from '../lib/contentful';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import SectionHeading from './SectionHeading.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+    locale: Locale;
+}
+const {locale} = Astro.props;
+const copy = getTranslation(locale);
+const projects = (await getProjects(locale)).filter((project) => project.featured).slice(0, 3);
+const projectsUrl = locale === 'nl-BE' ? '/projecten/' : '/en/projects/';
+const alternateUrl = locale === 'nl-BE' ? '/en/' : '/';
+---
+<BaseLayout title={copy.home.metaTitle} description={copy.home.metaDescription} locale={locale}
+            alternateUrl={alternateUrl}>
+    <Header locale={locale} alternateUrl={alternateUrl}/>
+    <main id="content">
+        <section class="hero">
+            <div class="hero-grid"></div>
+            <div class="container hero-content"><p class="eyebrow light"><span></span>{copy.home.heroEyebrow}</p>
+                <h1>{copy.home.heroTitle[0]}<br/><em>{copy.home.heroTitle[1]}</em></h1>
+                <p class="hero-copy">{copy.home.heroText}</p>
+                <div class="hero-actions"><a href="#contact" class="button button-yellow">{copy.home.heroCta} <span
+                        aria-hidden="true">↗</span></a><a href="#projects" class="text-link light">{copy.home.heroLink}
+                    <span aria-hidden="true">↓</span></a></div>
+            </div>
+            <div class="hero-mark" aria-hidden="true"><span>G</span><span>M</span><span>G</span></div>
+            <p class="hero-caption">{copy.home.heroCaption}</p></section>
+        <section id="services" class="section services container">
+            <SectionHeading eyebrow={copy.home.servicesEyebrow} title={copy.home.servicesTitle}
+                            intro={copy.home.servicesText}/>
+            <div class="service-list">{copy.home.services.map(([title, text], index) =>
+                    <article><span>0{index + 1}</span>
+                        <h3>{title}</h3>
+                        <p>{text}</p><a href="#contact">{copy.home.discoverMore} <b>↗</b></a></article>)}</div>
+        </section>
+        <section id="projects" class="section projects">
+            <div class="container">
+                <div class="projects-top">
+                    <SectionHeading eyebrow={copy.home.projectsEyebrow} title={copy.home.projectsTitle}
+                                    intro={copy.home.projectsText}/>
+                    <a class="text-link" href={projectsUrl}>{copy.home.allProjects} <span
+                            aria-hidden="true">↗</span></a></div>
+                <div class="project-grid">{projects.map((project, index) => <a href={`${projectsUrl}${project.slug}/`}
+                                                                               class:list={["project-card", `tone-${index + 1}`]}>
+                    <div class="project-visual"><span class="structure" aria-hidden="true"></span>
+                        <p>{copy.home.projectImagePlaceholder}</p></div>
+                    <div class="project-info"><p>{project.type} · {project.location}</p>
+                        <h3>{project.title}</h3><span aria-hidden="true">↗</span></div>
+                </a>)}</div>
+            </div>
+        </section>
+        <section id="about" class="section about">
+            <div class="container about-grid">
+                <div class="about-art">
+                    <div class="line-art" aria-hidden="true"></div>
+                    <p>{copy.home.aboutArt}</p></div>
+                <div>
+                    <SectionHeading eyebrow={copy.home.aboutEyebrow} title={copy.home.aboutTitle}
+                                    intro={copy.home.aboutText}/>
+                    <a href="#contact" class="button button-outline">{copy.home.meetUs} <span
+                            aria-hidden="true">↗</span></a></div>
+            </div>
+        </section>
+        <section id="process" class="section process">
+            <div class="container">
+                <SectionHeading eyebrow={copy.home.processEyebrow} title={copy.home.processTitle}/>
+                <ol>{copy.home.process.map(([title, text], index) =>
+                        <li><strong>0{index + 1}</strong>
+                            <h3>{title}</h3>
+                            <p>{text}</p></li>)}</ol>
+            </div>
+        </section>
+        <section id="contact" class="contact-section">
+            <div class="container contact-grid">
+                <div><p class="eyebrow light"><span></span>{copy.home.contactEyebrow}</p>
+                    <h2>{copy.home.contactTitle[0]}<br/><em>{copy.home.contactTitle[1]}</em></h2>
+                    <p>{copy.home.contactText}</p></div>
+                <form><label for="name">{copy.home.nameLabel}</label><input id="name" name="name" autocomplete="name"
+                                                                            required/><label
+                        for="email">{copy.home.emailLabel}</label><input id="email" name="email" type="email"
+                                                                         autocomplete="email" required/><label
+                        for="message">{copy.home.messageLabel}</label><textarea id="message" name="message" rows="4"
+                                                                                required></textarea>
+                    <button class="button button-yellow" type="submit">{copy.home.submit} <span
+                            aria-hidden="true">↗</span></button>
+                    <p class="form-note">{copy.home.formNote}</p></form>
+            </div>
+        </section>
+    </main>
+    <Footer locale={locale}/>
+</BaseLayout>

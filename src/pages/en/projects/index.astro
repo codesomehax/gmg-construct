@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import {getProjects} from '../../../lib/contentful';
+const projects = await getProjects('en-BE');
+---
+<BaseLayout title="Projects | G.M.G. Construct GCV"
+            description="View a selection of renovation and extension projects by G.M.G. Construct." locale="en-BE"
+            alternateUrl="/projecten/">
+    <Header locale="en-BE" alternateUrl="/projecten/"/>
+    <main id="content">
+        <section class="listing-hero">
+            <div class="container"><p class="eyebrow"><span></span>Our work</p>
+                <h1>Projects with<br/><em>character.</em></h1>
+                <p>A selection of work completed with care. Replace these example items with your projects in
+                    Contentful.</p></div>
+        </section>
+        <section class="section projects">
+            <div class="container">
+                <div class="project-grid">{projects.map((project, index) => <a href={`/en/projects/${project.slug}/`}
+                                                                               class:list={["project-card", `tone-${(index % 3) + 1}`]}>
+                    <div class="project-visual"><span class="structure"></span>
+                        <p>Project photo<br/>to be added</p></div>
+                    <div class="project-info"><p>{project.type} · {project.location}</p>
+                        <h2>{project.title}</h2><span>↗</span></div>
+                </a>)}</div>
+            </div>
+        </section>
+    </main>
+    <Footer locale="en-BE"/>
+</BaseLayout>

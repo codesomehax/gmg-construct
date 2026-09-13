@@ -5,12 +5,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro'; import Header
     getProject
 } from '../../lib/contentful';
 export async function getStaticPaths() {
-    return (await getProjects()).map(project => ({params: {slug: project.slug}}));
+    return (await getProjects('nl-BE')).map(project => ({params: {slug: project.slug}}));
 }
-const project = await getProject(Astro.params.slug!); if (!project) return Astro.redirect('/projecten');
+const project = await getProject(Astro.params.slug!, 'nl-BE'); if (!project) return Astro.redirect('/projecten');
 ---
-<BaseLayout title={`${project.title} | G.M.G. Construct`} description={project.description}>
-    <Header/>
+<BaseLayout title={`${project.title} | G.M.G. Construct`} description={project.description} locale="nl-BE"
+            alternateUrl="/en/projects/">
+    <Header locale="nl-BE" alternateUrl="/en/projects/"/>
     <main id="content">
         <section class="project-detail-hero">
             <div class="container"><a class="back-link" href="/projecten">← Alle realisaties</a>
@@ -49,5 +50,5 @@ const project = await getProject(Astro.params.slug!); if (!project) return Astro
                     contact op <span>↗</span></a></div>
         </section>
     </main>
-    <Footer/>
+    <Footer locale="nl-BE"/>
 </BaseLayout>
