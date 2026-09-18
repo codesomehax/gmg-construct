@@ -31,7 +31,6 @@
 
 .listing-hero p:last-child, .project-detail-hero p:last-child {
     color: var(--muted);
-    max-width: 500px;
     margin: 24px 0 0
 }
 
